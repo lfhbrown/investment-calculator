@@ -1,41 +1,48 @@
 import React, { useState } from "react";
 import Header from "./components/Header/Header";
-import UserInput from "./components/UserInput/UserInput";
+import FormInput from "./components/FormInput/FormInput";
 import ResultsTable from "./components/ResultsTable/ResultsTable";
 
 function App() {
-  const calculateHandler = (userInput) => {
-    // Should be triggered when form is submitted
-    // You might not directly want to bind it to the submit event on the form though...
+  const [formData, setFormData] = useState(null);
 
-    const yearlyData = []; // per-year results
-    //Initializes and empty array called yearlyData, and will store the results calculated for each year
-    let currentSavings = +userInput["current-savings"]; // feel free to change the shape of this input object!
-    const yearlyContribution = +userInput["yearly-contribution"]; // as mentioned: feel free to change the shape...
-    const expectedReturn = +userInput["expected-return"] / 100;
-    const duration = +userInput["duration"];
-    //Each const declared sets the data entered by the end user and assigns it a title, eg: "current-savings".  The + sign before userInput["current-savings"] converts the value to a number.
-    // The below code calculates yearly results (total savings, interest etc)
+  const calculateHandler = (formData) => {
+    setFormData(formData);
+  };
+
+  // Example of derived state. The calculate function runs if data is passed from the FormInput to the calculateHandler. This is a more efficient way of dealing with the passed in data rather than managing the state directly
+  // because the engine that parses the code will not run the code (and save memory) unless data is passed which would initiate the setResults function with that object, meaning results would be truthy and run the code
+
+  if (formData) {
+    const yearlyData = [];
+    // Initializes and empty array called yearlyData, and will store the results calculated for each year
+    let currentSavings = +formData["current-savings"]; // feel free to change the shape of this input object!
+    const yearlyContribution = +formData["yearly-contribution"]; // as mentioned: feel free to change the shape...
+    const expectedReturn = +formData["expected-return"] / 100;
+    const duration = +formData["duration"];
+
+    // Each const declared sets the data entered by the end user and assigns it a title, eg: "current-savings".  The + sign before userInput["current-savings"] converts the value to a number.
+    // The below code calculates yearly results (total savings, interest etc.)
     for (let i = 0; i < duration; i++) {
       const yearlyInterest = currentSavings * expectedReturn;
       currentSavings += yearlyInterest + yearlyContribution;
       yearlyData.push({
-        // feel free to change the shape of the data pushed to the array!
         year: i + 1,
         yearlyInterest: yearlyInterest,
         savingsEndOfYear: currentSavings,
         yearlyContribution: yearlyContribution,
       });
     }
-
-    // do something with yearlyData ...
-  };
+    console.log(yearlyData);
+  }
 
   return (
     <div>
       <Header />
-      <UserInput calculateHandler={calculateHandler} />
-      <ResultsTable />
+      <FormInput calculateHandler={calculateHandler} />
+
+      {!formData && <p>Please enter data</p>}
+      {formData && <ResultsTable />}
     </div>
   );
 }

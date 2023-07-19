@@ -7,21 +7,25 @@ const initialUserInput = {
   duration: 10,
 };
 
-const UserInput = () => {
-  const [userInput, setUserInput] = useState(initialUserInput);
-  const submitHandler = (event) => {
-    event.preventDefault();
-  };
+const FormInput = (props) => {
+  const { calculateHandler } = props;
+  const [userDataInput, setUserDataInput] = useState(initialUserInput);
+
   const resetHandler = () => {
-    setUserInput(initialUserInput);
+    setUserDataInput(initialUserInput);
   };
   const inputChangeHandler = (input, value) => {
-    setUserInput((prevInput) => {
+    setUserDataInput((prevInput) => {
       return {
         ...prevInput,
         [input]: value,
       };
     });
+  };
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    calculateHandler(userDataInput);
   };
 
   return (
@@ -35,7 +39,7 @@ const UserInput = () => {
             }
             type="number"
             id="current-savings"
-            value={userInput["current-savings"]}
+            value={userDataInput["current-savings"]}
           />
         </p>
         <p>
@@ -46,7 +50,7 @@ const UserInput = () => {
             }
             type="number"
             id="yearly-contribution"
-            value={userInput["yearly-contribution"]}
+            value={userDataInput["yearly-contribution"]}
           />
         </p>
       </div>
@@ -61,7 +65,7 @@ const UserInput = () => {
             }
             type="number"
             id="expected-return"
-            value={userInput["expected-return"]}
+            value={userDataInput["expected-return"]}
           />
         </p>
         <p>
@@ -72,7 +76,7 @@ const UserInput = () => {
             }
             type="number"
             id="duration"
-            value={userInput["duration"]}
+            value={userDataInput["duration"]}
           />
         </p>
       </div>
@@ -88,4 +92,4 @@ const UserInput = () => {
   );
 };
 
-export default UserInput;
+export default FormInput;
