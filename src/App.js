@@ -3,8 +3,8 @@ import Header from "./components/Header/Header";
 import FormInput from "./components/FormInput/FormInput";
 import ResultsTable from "./components/ResultsTable/ResultsTable";
 
-function App() {
-  const [formData, setFormData] = useState(null);
+function App(props) {
+  const [formData, setFormData] = useState(props.initialUserInput);
 
   const calculateHandler = (formData) => {
     setFormData(formData);
@@ -21,7 +21,7 @@ function App() {
     const expectedReturn = +formData["expected-return"] / 100;
     const duration = +formData["duration"];
 
-    // Each const declared sets the data entered by the end user and assigns it a title, eg: "current-savings".  The + sign before userInput["current-savings"] converts the value to a number.
+    // Each const declared is passed the data entered by the end user and assigns, eg: "current-savings".  The + sign before formData["current-savings"] converts the entered value to a number.
     // The below code calculates yearly results (total savings, interest etc.)
     for (let i = 0; i < duration; i++) {
       const yearlyInterest = currentSavings * expectedReturn;
@@ -40,7 +40,6 @@ function App() {
     <div>
       <Header />
       <FormInput calculateHandler={calculateHandler} />
-
       {!formData && <p>Please enter data</p>}
       {formData && <ResultsTable />}
     </div>
