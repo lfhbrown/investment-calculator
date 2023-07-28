@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 
-const initialUserInput = {
-  "current-savings": 10000,
-  "yearly-contribution": 1200,
-  "expected-return": 7,
-  duration: 10,
-};
+//take this out and throw inside of my calculate.js and rename calculate.js to helper functions
+//as well as the reset handler
 
 const FormInput = (props) => {
+  const initialUserInput = {
+    "current-savings": 10000,
+    "yearly-contribution": 1200,
+    "expected-return": 7,
+    duration: 10,
+  };
   const { calculateHandler } = props;
   const [userDataInput, setUserDataInput] = useState(initialUserInput);
 
