@@ -29,16 +29,20 @@ function App() {
   );
   //the array above is called a dependency array. It's the second argument in the useEffect function that determines when the first argument is executed. In this case useEffect  is waiting for formData to change.
   //Once it does it will then call the setTableData function which we initialize with our helper function calculate and pass in the updated formData which we can pass to our FormTable component to display.
+  console.log(formData);
+
   return (
     <div>
       <Header />
 
-      <FormInput
-        calculateHandler={calculateHandler}
-        initialInvestment={tableData["current-savings"]}
-      />
+      <FormInput calculateHandler={calculateHandler} />
       {!formData && <p>Please enter data</p>}
-      {formData && <ResultsTable tableData={tableData} />}
+      {formData && (
+        <ResultsTable
+          tableData={tableData}
+          initialInvestment={formData["current-savings"]}
+        />
+      )}
     </div>
   );
 }

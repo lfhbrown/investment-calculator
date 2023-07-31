@@ -1,4 +1,5 @@
 import React from "react";
+import { formatter } from "../utils/formatter";
 
 const ResultsTable = (props) => {
   const { tableData, initialInvestment } = props;
@@ -19,18 +20,22 @@ const ResultsTable = (props) => {
         </thead>
         <tbody>
           {tableData.map((yearData) => (
-            <tr>
+            <tr key={yearData.year}>
               <td>{yearData.year}</td>
-              <td>{yearData.savingsEndOfYear}</td>
-              <td>{yearData.yearlyInterest}</td>
+              <td>{formatter.format(yearData.savingsEndOfYear)}</td>
+              <td>{formatter.format(yearData.yearlyInterest)}</td>
               <td>
-                {yearData.savingsEndOfYear -
-                  initialInvestment -
-                  yearData.yearlyContribution * yearData.year}
+                {formatter.format(
+                  yearData.savingsEndOfYear -
+                    initialInvestment -
+                    yearData.yearlyContribution * yearData.year
+                )}
               </td>
               <td>
-                {initialInvestment +
-                  yearData.yearlyContribution * yearData.year}
+                {formatter.format(
+                  initialInvestment +
+                    yearData.yearlyContribution * yearData.year
+                )}
               </td>
             </tr>
           ))}
