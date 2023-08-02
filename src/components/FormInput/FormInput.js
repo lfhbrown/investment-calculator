@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-
-//take this out and throw inside of my calculate.js and rename calculate.js to helper functions
-//as well as the reset handler
+import classes from "./FormInput.module.css";
 
 const FormInput = (props) => {
   const { calculateHandler, tableReset } = props;

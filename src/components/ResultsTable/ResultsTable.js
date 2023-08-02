@@ -1,5 +1,6 @@
 import React from "react";
 import { formatter } from "../utils/formatter";
+import classes from "./ResultsTable.module.css";
 
 const ResultsTable = (props) => {
   const { tableData, initialInvestment } = props;
