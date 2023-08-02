@@ -4,23 +4,23 @@ import React, { useState } from "react";
 //as well as the reset handler
 
 const FormInput = (props) => {
-  const initialUserInput = {
-    "current-savings": 10000,
-    "yearly-contribution": 1200,
-    "expected-return": 7,
-    duration: 10,
-  };
+  // const initialUserInput = {
+  //   "current-savings": "",
+  //   "yearly-contribution": "",
+  //   "expected-return": "",
+  //   duration: "",
+  // };
   const { calculateHandler } = props;
-  const [userDataInput, setUserDataInput] = useState(initialUserInput);
+  const [userDataInput, setUserDataInput] = useState("");
 
   const resetHandler = () => {
-    setUserDataInput(initialUserInput);
+    setUserDataInput("");
   };
   const inputChangeHandler = (input, value) => {
     setUserDataInput((prevInput) => {
       return {
         ...prevInput,
-        [input]: value,
+        [input]: +value,
       };
     });
   };

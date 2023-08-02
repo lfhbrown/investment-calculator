@@ -4,15 +4,8 @@ import FormInput from "./components/FormInput/FormInput";
 import ResultsTable from "./components/ResultsTable/ResultsTable";
 import { calculate } from "./components/utils/calculate";
 
-const initialUserInput = {
-  "current-savings": "",
-  "yearly-contribution": "",
-  "expected-return": "",
-  duration: "",
-};
-
 function App() {
-  const [formData, setFormData] = useState(initialUserInput);
+  const [formData, setFormData] = useState("");
   const [tableData, setTableData] = useState("");
 
   const calculateHandler = (formData) => {
@@ -36,7 +29,7 @@ function App() {
       <Header />
 
       <FormInput calculateHandler={calculateHandler} />
-      {!formData && <p>Please enter data</p>}
+      {!formData && <p style={{ textAlign: "center" }}>Please enter data</p>}
       {formData && (
         <ResultsTable
           tableData={tableData}
