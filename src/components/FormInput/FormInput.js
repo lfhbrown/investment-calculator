@@ -10,11 +10,12 @@ const FormInput = (props) => {
   //   "expected-return": "",
   //   duration: "",
   // };
-  const { calculateHandler } = props;
+  const { calculateHandler, tableReset } = props;
   const [userDataInput, setUserDataInput] = useState("");
 
   const resetHandler = () => {
     setUserDataInput("");
+    tableReset();
   };
   const inputChangeHandler = (input, value) => {
     setUserDataInput((prevInput) => {

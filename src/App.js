@@ -8,6 +8,10 @@ function App() {
   const [formData, setFormData] = useState("");
   const [tableData, setTableData] = useState("");
 
+  const tableReset = () => {
+    setFormData("");
+  };
+
   const calculateHandler = (formData) => {
     setFormData(formData);
   };
@@ -28,7 +32,7 @@ function App() {
     <div>
       <Header />
 
-      <FormInput calculateHandler={calculateHandler} />
+      <FormInput calculateHandler={calculateHandler} tableReset={tableReset} />
       {!formData && <p style={{ textAlign: "center" }}>Please enter data</p>}
       {formData && (
         <ResultsTable
