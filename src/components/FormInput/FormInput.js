@@ -4,12 +4,6 @@ import React, { useState } from "react";
 //as well as the reset handler
 
 const FormInput = (props) => {
-  // const initialUserInput = {
-  //   "current-savings": "",
-  //   "yearly-contribution": "",
-  //   "expected-return": "",
-  //   duration: "",
-  // };
   const { calculateHandler, tableReset } = props;
   const [userDataInput, setUserDataInput] = useState("");
 
